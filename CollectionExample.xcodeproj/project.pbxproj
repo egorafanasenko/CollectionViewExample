@@ -9,22 +9,14 @@
 /* Begin PBXBuildFile section */
 		A8C26E1F1B638B0500938608 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C26E1E1B638B0500938608 /* main.m */; };
 		A8C26E221B638B0500938608 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C26E211B638B0500938608 /* AppDelegate.m */; };
-		A8C26E251B638B0500938608 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C26E241B638B0500938608 /* ViewController.m */; };
-		A8C26E281B638B0500938608 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8C26E261B638B0500938608 /* Main.storyboard */; };
 		A8C26E2A1B638B0500938608 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8C26E291B638B0500938608 /* Images.xcassets */; };
 		A8C26E2D1B638B0500938608 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8C26E2B1B638B0500938608 /* LaunchScreen.xib */; };
-		A8C26E391B638B0600938608 /* CollectionExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C26E381B638B0600938608 /* CollectionExampleTests.m */; };
+		A8C26E481B638C0400938608 /* PhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C26E471B638C0400938608 /* PhotoView.m */; };
+		A8C26E4B1B638C0D00938608 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C26E4A1B638C0D00938608 /* PhotoViewController.m */; };
+		A8C26E551B638EBF00938608 /* PhotoDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C26E541B638EBF00938608 /* PhotoDataProvider.m */; };
+		A8C26E581B6392D600938608 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C26E571B6392D600938608 /* PhotoCell.m */; };
+		A8C26E5B1B63939700938608 /* PhotoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C26E5A1B63939700938608 /* PhotoItem.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		A8C26E331B638B0600938608 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A8C26E111B638B0500938608 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A8C26E181B638B0500938608;
-			remoteInfo = CollectionExample;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		A8C26E191B638B0500938608 /* CollectionExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -32,25 +24,23 @@
 		A8C26E1E1B638B0500938608 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A8C26E201B638B0500938608 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A8C26E211B638B0500938608 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		A8C26E231B638B0500938608 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		A8C26E241B638B0500938608 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		A8C26E271B638B0500938608 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A8C26E291B638B0500938608 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A8C26E2C1B638B0500938608 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		A8C26E321B638B0600938608 /* CollectionExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CollectionExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A8C26E371B638B0600938608 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A8C26E381B638B0600938608 /* CollectionExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionExampleTests.m; sourceTree = "<group>"; };
+		A8C26E461B638C0400938608 /* PhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoView.h; sourceTree = "<group>"; };
+		A8C26E471B638C0400938608 /* PhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoView.m; sourceTree = "<group>"; };
+		A8C26E491B638C0D00938608 /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
+		A8C26E4A1B638C0D00938608 /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
+		A8C26E511B638E5C00938608 /* DataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataProvider.h; sourceTree = "<group>"; };
+		A8C26E531B638EBF00938608 /* PhotoDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoDataProvider.h; sourceTree = "<group>"; };
+		A8C26E541B638EBF00938608 /* PhotoDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoDataProvider.m; sourceTree = "<group>"; };
+		A8C26E561B6392D600938608 /* PhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
+		A8C26E571B6392D600938608 /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
+		A8C26E591B63939700938608 /* PhotoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoItem.h; sourceTree = "<group>"; };
+		A8C26E5A1B63939700938608 /* PhotoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A8C26E161B638B0500938608 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A8C26E2F1B638B0600938608 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -64,7 +54,6 @@
 			isa = PBXGroup;
 			children = (
 				A8C26E1B1B638B0500938608 /* CollectionExample */,
-				A8C26E351B638B0600938608 /* CollectionExampleTests */,
 				A8C26E1A1B638B0500938608 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -73,7 +62,6 @@
 			isa = PBXGroup;
 			children = (
 				A8C26E191B638B0500938608 /* CollectionExample.app */,
-				A8C26E321B638B0600938608 /* CollectionExampleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -81,11 +69,10 @@
 		A8C26E1B1B638B0500938608 /* CollectionExample */ = {
 			isa = PBXGroup;
 			children = (
+				A8C26E4F1B638E4E00938608 /* Logic */,
+				A8C26E431B638BD900938608 /* Controllers */,
 				A8C26E201B638B0500938608 /* AppDelegate.h */,
 				A8C26E211B638B0500938608 /* AppDelegate.m */,
-				A8C26E231B638B0500938608 /* ViewController.h */,
-				A8C26E241B638B0500938608 /* ViewController.m */,
-				A8C26E261B638B0500938608 /* Main.storyboard */,
 				A8C26E291B638B0500938608 /* Images.xcassets */,
 				A8C26E2B1B638B0500938608 /* LaunchScreen.xib */,
 				A8C26E1C1B638B0500938608 /* Supporting Files */,
@@ -102,21 +89,61 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		A8C26E351B638B0600938608 /* CollectionExampleTests */ = {
+		A8C26E431B638BD900938608 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A8C26E381B638B0600938608 /* CollectionExampleTests.m */,
-				A8C26E361B638B0600938608 /* Supporting Files */,
+				A8C26E441B638BE400938608 /* Photo */,
 			);
-			path = CollectionExampleTests;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
-		A8C26E361B638B0600938608 /* Supporting Files */ = {
+		A8C26E441B638BE400938608 /* Photo */ = {
 			isa = PBXGroup;
 			children = (
-				A8C26E371B638B0600938608 /* Info.plist */,
+				A8C26E521B638EB200938608 /* Logic */,
+				A8C26E451B638BEE00938608 /* Views */,
+				A8C26E491B638C0D00938608 /* PhotoViewController.h */,
+				A8C26E4A1B638C0D00938608 /* PhotoViewController.m */,
 			);
-			name = "Supporting Files";
+			path = Photo;
+			sourceTree = "<group>";
+		};
+		A8C26E451B638BEE00938608 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A8C26E461B638C0400938608 /* PhotoView.h */,
+				A8C26E471B638C0400938608 /* PhotoView.m */,
+				A8C26E561B6392D600938608 /* PhotoCell.h */,
+				A8C26E571B6392D600938608 /* PhotoCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A8C26E4F1B638E4E00938608 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				A8C26E501B638E4E00938608 /* Protocols */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		A8C26E501B638E4E00938608 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				A8C26E511B638E5C00938608 /* DataProvider.h */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		A8C26E521B638EB200938608 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				A8C26E531B638EBF00938608 /* PhotoDataProvider.h */,
+				A8C26E541B638EBF00938608 /* PhotoDataProvider.m */,
+				A8C26E591B63939700938608 /* PhotoItem.h */,
+				A8C26E5A1B63939700938608 /* PhotoItem.m */,
+			);
+			path = Logic;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,24 +166,6 @@
 			productReference = A8C26E191B638B0500938608 /* CollectionExample.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A8C26E311B638B0600938608 /* CollectionExampleTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A8C26E3F1B638B0600938608 /* Build configuration list for PBXNativeTarget "CollectionExampleTests" */;
-			buildPhases = (
-				A8C26E2E1B638B0600938608 /* Sources */,
-				A8C26E2F1B638B0600938608 /* Frameworks */,
-				A8C26E301B638B0600938608 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A8C26E341B638B0600938608 /* PBXTargetDependency */,
-			);
-			name = CollectionExampleTests;
-			productName = CollectionExampleTests;
-			productReference = A8C26E321B638B0600938608 /* CollectionExampleTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -168,10 +177,6 @@
 				TargetAttributes = {
 					A8C26E181B638B0500938608 = {
 						CreatedOnToolsVersion = 6.4;
-					};
-					A8C26E311B638B0600938608 = {
-						CreatedOnToolsVersion = 6.4;
-						TestTargetID = A8C26E181B638B0500938608;
 					};
 				};
 			};
@@ -189,7 +194,6 @@
 			projectRoot = "";
 			targets = (
 				A8C26E181B638B0500938608 /* CollectionExample */,
-				A8C26E311B638B0600938608 /* CollectionExampleTests */,
 			);
 		};
 /* End PBXProject section */
@@ -199,16 +203,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8C26E281B638B0500938608 /* Main.storyboard in Resources */,
 				A8C26E2D1B638B0500938608 /* LaunchScreen.xib in Resources */,
 				A8C26E2A1B638B0500938608 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A8C26E301B638B0600938608 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,39 +215,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8C26E251B638B0500938608 /* ViewController.m in Sources */,
+				A8C26E481B638C0400938608 /* PhotoView.m in Sources */,
+				A8C26E4B1B638C0D00938608 /* PhotoViewController.m in Sources */,
+				A8C26E581B6392D600938608 /* PhotoCell.m in Sources */,
 				A8C26E221B638B0500938608 /* AppDelegate.m in Sources */,
 				A8C26E1F1B638B0500938608 /* main.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A8C26E2E1B638B0600938608 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A8C26E391B638B0600938608 /* CollectionExampleTests.m in Sources */,
+				A8C26E551B638EBF00938608 /* PhotoDataProvider.m in Sources */,
+				A8C26E5B1B63939700938608 /* PhotoItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		A8C26E341B638B0600938608 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A8C26E181B638B0500938608 /* CollectionExample */;
-			targetProxy = A8C26E331B638B0600938608 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
-		A8C26E261B638B0500938608 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A8C26E271B638B0500938608 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A8C26E2B1B638B0500938608 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -363,40 +339,6 @@
 			};
 			name = Release;
 		};
-		A8C26E401B638B0600938608 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = CollectionExampleTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CollectionExample.app/CollectionExample";
-			};
-			name = Debug;
-		};
-		A8C26E411B638B0600938608 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = CollectionExampleTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CollectionExample.app/CollectionExample";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -414,14 +356,6 @@
 			buildConfigurations = (
 				A8C26E3D1B638B0600938608 /* Debug */,
 				A8C26E3E1B638B0600938608 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
-		A8C26E3F1B638B0600938608 /* Build configuration list for PBXNativeTarget "CollectionExampleTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A8C26E401B638B0600938608 /* Debug */,
-				A8C26E411B638B0600938608 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};

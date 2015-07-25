@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  PhotoViewController.h
 //  CollectionExample
 //
 //  Created by Alexandr on 25.07.15.
@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PhotoView.h"
 
-@interface ViewController : UIViewController
+@interface PhotoViewController : UIViewController
 
+@property(nonatomic, strong) PhotoView *view;
 
 @end
-
