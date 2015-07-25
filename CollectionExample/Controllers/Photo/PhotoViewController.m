@@ -46,7 +46,6 @@ static NSString *const PhotoCellIdentifier = @"PhotoCellIdentifier";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     PhotoCell *cell = [self.view.collectionView dequeueReusableCellWithReuseIdentifier:PhotoCellIdentifier forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor colorWithRed:arc4random() % 255 / 255.0f green:arc4random() % 255 / 255.0f blue:arc4random() % 255 / 255.0f alpha:1.0f];
     [cell configureWithItem:[self.dataProvider objectForIndexPath:indexPath]];
     return cell;
 }
