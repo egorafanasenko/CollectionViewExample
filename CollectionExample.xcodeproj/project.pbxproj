@@ -13,9 +13,9 @@
 		A8C26E2D1B638B0500938608 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8C26E2B1B638B0500938608 /* LaunchScreen.xib */; };
 		A8C26E481B638C0400938608 /* PhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C26E471B638C0400938608 /* PhotoView.m */; };
 		A8C26E4B1B638C0D00938608 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C26E4A1B638C0D00938608 /* PhotoViewController.m */; };
-		A8C26E551B638EBF00938608 /* PhotoDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C26E541B638EBF00938608 /* PhotoDataProvider.m */; };
 		A8C26E581B6392D600938608 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C26E571B6392D600938608 /* PhotoCell.m */; };
-		A8C26E5B1B63939700938608 /* PhotoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C26E5A1B63939700938608 /* PhotoItem.m */; };
+		A8C26E621B65436700938608 /* PhotoDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C26E5E1B65436700938608 /* PhotoDataProvider.m */; };
+		A8C26E631B65436700938608 /* PhotoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C26E611B65436700938608 /* PhotoItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,12 +31,12 @@
 		A8C26E491B638C0D00938608 /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
 		A8C26E4A1B638C0D00938608 /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
 		A8C26E511B638E5C00938608 /* DataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataProvider.h; sourceTree = "<group>"; };
-		A8C26E531B638EBF00938608 /* PhotoDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoDataProvider.h; sourceTree = "<group>"; };
-		A8C26E541B638EBF00938608 /* PhotoDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoDataProvider.m; sourceTree = "<group>"; };
 		A8C26E561B6392D600938608 /* PhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
 		A8C26E571B6392D600938608 /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
-		A8C26E591B63939700938608 /* PhotoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoItem.h; sourceTree = "<group>"; };
-		A8C26E5A1B63939700938608 /* PhotoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoItem.m; sourceTree = "<group>"; };
+		A8C26E5D1B65436700938608 /* PhotoDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoDataProvider.h; sourceTree = "<group>"; };
+		A8C26E5E1B65436700938608 /* PhotoDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoDataProvider.m; sourceTree = "<group>"; };
+		A8C26E601B65436700938608 /* PhotoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoItem.h; sourceTree = "<group>"; };
+		A8C26E611B65436700938608 /* PhotoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +100,8 @@
 		A8C26E441B638BE400938608 /* Photo */ = {
 			isa = PBXGroup;
 			children = (
-				A8C26E521B638EB200938608 /* Logic */,
+				A8C26E5C1B65436700938608 /* DataSource */,
+				A8C26E5F1B65436700938608 /* Entities */,
 				A8C26E451B638BEE00938608 /* Views */,
 				A8C26E491B638C0D00938608 /* PhotoViewController.h */,
 				A8C26E4A1B638C0D00938608 /* PhotoViewController.m */,
@@ -135,15 +136,22 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		A8C26E521B638EB200938608 /* Logic */ = {
+		A8C26E5C1B65436700938608 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
-				A8C26E531B638EBF00938608 /* PhotoDataProvider.h */,
-				A8C26E541B638EBF00938608 /* PhotoDataProvider.m */,
-				A8C26E591B63939700938608 /* PhotoItem.h */,
-				A8C26E5A1B63939700938608 /* PhotoItem.m */,
+				A8C26E5D1B65436700938608 /* PhotoDataProvider.h */,
+				A8C26E5E1B65436700938608 /* PhotoDataProvider.m */,
 			);
-			path = Logic;
+			path = DataSource;
+			sourceTree = "<group>";
+		};
+		A8C26E5F1B65436700938608 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				A8C26E601B65436700938608 /* PhotoItem.h */,
+				A8C26E611B65436700938608 /* PhotoItem.m */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,9 +227,9 @@
 				A8C26E4B1B638C0D00938608 /* PhotoViewController.m in Sources */,
 				A8C26E581B6392D600938608 /* PhotoCell.m in Sources */,
 				A8C26E221B638B0500938608 /* AppDelegate.m in Sources */,
+				A8C26E631B65436700938608 /* PhotoItem.m in Sources */,
 				A8C26E1F1B638B0500938608 /* main.m in Sources */,
-				A8C26E551B638EBF00938608 /* PhotoDataProvider.m in Sources */,
-				A8C26E5B1B63939700938608 /* PhotoItem.m in Sources */,
+				A8C26E621B65436700938608 /* PhotoDataProvider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
