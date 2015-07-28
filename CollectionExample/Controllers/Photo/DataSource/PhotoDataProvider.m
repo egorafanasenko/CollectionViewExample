@@ -84,7 +84,7 @@
 {
     PhotoItem *item = [PhotoItem itemWithImage:image createAt:[NSDate date]];
     [self.photos addObject:item];
-        
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^
     {
         Photo *photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:[CoreDataManager sharedManager].backgroundContext];
@@ -112,7 +112,7 @@
 
 - (void)removeSelectedPhotos
 {
-    NSArray *selectedPhotos = [self.photos filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"isSelected == YES"]];
+    NSArray *selectedPhotos = [self selectedPhotos];
     if(selectedPhotos.count == 0)
     {
         NSAssert(NO, @"selected photos count == 0");
