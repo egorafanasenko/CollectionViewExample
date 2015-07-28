@@ -68,7 +68,7 @@
 
 - (void)configureWithItem:(PhotoItem *)item
 {
-    self.imageView.image = item.smallImage;
+    self.imageView.image = item.image;
     
     self.gradientLayer.hidden = !item.isSelected;
 }

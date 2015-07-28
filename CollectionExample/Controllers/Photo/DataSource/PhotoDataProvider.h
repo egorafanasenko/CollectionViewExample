@@ -15,6 +15,9 @@
     DataProvider
 >
 
-- (void)addRandomItem;
+- (void)addPhoto:(UIImage *)image;
+
+- (NSArray *)selectedPhotosIndexPaths;
+- (void)removeSelectedPhotos;
 
 @end

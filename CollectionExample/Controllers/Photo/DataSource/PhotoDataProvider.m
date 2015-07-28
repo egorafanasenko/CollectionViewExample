@@ -8,6 +8,8 @@
 
 #import "PhotoDataProvider.h"
 #import "PhotoItem.h"
+#import "CoreDataManager.h"
+#import "Photo.h"
 
 @interface PhotoDataProvider()
 
@@ -22,15 +24,29 @@
 - (void)createPhotos
 {
     self.photos = [NSMutableArray array];
-    for(NSUInteger index = 1; index < 16; index++)
+    
+    NSError *fetchErorr = nil;
+    NSFetchRequest *fetchReq = [NSFetchRequest fetchRequestWithEntityName:@"Photo"];
+    NSArray *photos = [[CoreDataManager sharedManager].managedObjectContext executeFetchRequest:fetchReq error:&fetchErorr];
+    if(fetchErorr)
     {
-        [self.photos addObject:[PhotoItem itemWithSmallImage:[self imageAtIndex:index]]];
+        NSLog(@"%s %@", __PRETTY_FUNCTION__, fetchErorr.localizedDescription);
+    }
+
+    for(Photo *photo in photos)
+    {
+        [self.photos addObject:[PhotoItem itemWithImage:[UIImage imageWithData:photo.imageData] createAt:photo.createAt]];
     }
 }
 
 - (UIImage *)imageAtIndex:(NSUInteger)index
 {
     return [UIImage imageNamed:[NSString stringWithFormat:@"%li.jpg", (long)index]];
+}
+
+- (NSArray *)selectedPhotos
+{
+    return [self.photos filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"isSelected == YES"]];
 }
 
 #pragma mark DataProvderProtocol methods
@@ -64,10 +80,56 @@
 
 #pragma mark Interface methods
 
-- (void)addRandomItem
+- (void)addPhoto:(UIImage *)image
 {
-    PhotoItem *item = [PhotoItem itemWithSmallImage:[self imageAtIndex:arc4random() % 15 + 1]];
+    PhotoItem *item = [PhotoItem itemWithImage:image createAt:[NSDate date]];
     [self.photos addObject:item];
+    
+    [CoreDataManager sharedManager];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^
+    {
+        Photo *photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:[CoreDataManager sharedManager].backgroundContext];
+        
+        NSData *imageData = UIImageJPEGRepresentation(item.image, 1.0f);
+        photo.imageData = imageData;
+        photo.createAt = item.createAt;
+        
+        [[CoreDataManager sharedManager] saveBackgroundContext];
+    });
+}
+
+- (NSArray *)selectedPhotosIndexPaths
+{
+    NSArray *photos = [self selectedPhotos];
+    NSMutableArray *indexPaths = [NSMutableArray array];
+    
+    for(PhotoItem *item in photos)
+    {
+        [indexPaths addObject:[NSIndexPath indexPathForRow:[self.photos indexOfObject:item] inSection:0]];
+    }
+    
+    return indexPaths;
+}
+
+- (void)removeSelectedPhotos
+{
+    NSArray *selectedPhotos = [self.photos filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"isSelected == YES"]];
+    if(selectedPhotos.count == 0)
+    {
+        NSAssert(NO, @"selected photos count == 0");
+    }
+
+    NSFetchRequest *fetchReq = [NSFetchRequest fetchRequestWithEntityName:@"Photo"];
+    for(PhotoItem *item in selectedPhotos)
+    {
+        fetchReq.predicate = [NSPredicate predicateWithFormat:@"createAt == %@", item.createAt];
+        NSArray *fetchedItems = [[CoreDataManager sharedManager].managedObjectContext executeFetchRequest:fetchReq error:NULL];
+        [[[CoreDataManager sharedManager] managedObjectContext] deleteObject:[fetchedItems firstObject]];
+    }
+    
+    [self.photos removeObjectsInArray:selectedPhotos];
+    [[CoreDataManager sharedManager] saveMainContext];
 }
 
 @end

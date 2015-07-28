@@ -16,7 +16,9 @@ static NSString *const PhotoCellIdentifier = @"PhotoCellIdentifier";
 <
     UICollectionViewDataSource,
     UICollectionViewDelegate,
-    UICollectionViewDelegateFlowLayout
+    UICollectionViewDelegateFlowLayout,
+    UIImagePickerControllerDelegate,
+    UINavigationControllerDelegate
 >
 
 @property(nonatomic, strong) PhotoDataProvider *dataProvider;
@@ -30,10 +32,23 @@ static NSString *const PhotoCellIdentifier = @"PhotoCellIdentifier";
 
 - (void)onAddButtonClick:(UIButton *)button
 {
-    [self.dataProvider addRandomItem];
-    NSIndexPath *itemPath = [NSIndexPath indexPathForRow:[self.dataProvider numberOfRowsInSection:1] - 1  inSection:0];
-    [self.view.collectionView insertItemsAtIndexPaths:@[itemPath]];
-    [self.view.collectionView scrollToItemAtIndexPath:itemPath atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
+    [self createImagePicker];
+}
+
+- (void)onRemovePhotosButtonClock:(UIButton *)button
+{
+    NSArray *indexPaths = [self.dataProvider selectedPhotosIndexPaths];
+    [self.dataProvider removeSelectedPhotos];
+    [self.view.collectionView deleteItemsAtIndexPaths:indexPaths];
+}
+
+- (void)createImagePicker
+{
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    imagePicker.delegate = self;
+    
+    [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
 #pragma mark UICollectionViewDataSourceProtocol methods
@@ -67,6 +82,20 @@ static NSString *const PhotoCellIdentifier = @"PhotoCellIdentifier";
     return CGSizeMake(width, width);
 }
 
+#pragma mark UIImagePickerControllerDelegate protocol methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *photo = info[UIImagePickerControllerOriginalImage];
+    
+    [self.dataProvider addPhoto:photo];
+    NSIndexPath *photoPath = [NSIndexPath indexPathForRow:[self.dataProvider numberOfRowsInSection:0] - 1 inSection:0];
+    [self.view.collectionView insertItemsAtIndexPaths:@[photoPath]];
+    [self.view.collectionView scrollToItemAtIndexPath:photoPath atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark NSObject methods
 
 - (instancetype)init
@@ -90,7 +119,10 @@ static NSString *const PhotoCellIdentifier = @"PhotoCellIdentifier";
 {
     [super viewDidLoad];
     
+    [self.view.removePhotosButton setTitle:@"Remove" forState:UIControlStateNormal];
+    
     [self.view.addButton addTarget:self action:@selector(onAddButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view.removePhotosButton addTarget:self action:@selector(onRemovePhotosButtonClock:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view.collectionView registerClass:[PhotoCell class] forCellWithReuseIdentifier:PhotoCellIdentifier];
     

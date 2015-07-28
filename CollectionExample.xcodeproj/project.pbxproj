@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A88283001B681C2C0042083D /* Photos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A88282FE1B681C2C0042083D /* Photos.xcdatamodeld */; };
+		A88283051B681CD90042083D /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = A88283041B681CD90042083D /* Photo.m */; };
+		A88283091B681D3A0042083D /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A88283081B681D3A0042083D /* CoreDataManager.m */; };
+		A882830B1B681DB40042083D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A882830A1B681DB40042083D /* CoreData.framework */; };
 		A8C26E1F1B638B0500938608 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C26E1E1B638B0500938608 /* main.m */; };
 		A8C26E221B638B0500938608 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C26E211B638B0500938608 /* AppDelegate.m */; };
 		A8C26E2A1B638B0500938608 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8C26E291B638B0500938608 /* Images.xcassets */; };
@@ -19,6 +23,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A88282FF1B681C2C0042083D /* Photos.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Photos.xcdatamodel; sourceTree = "<group>"; };
+		A88283031B681CD90042083D /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
+		A88283041B681CD90042083D /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		A88283071B681D3A0042083D /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
+		A88283081B681D3A0042083D /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
+		A882830A1B681DB40042083D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A8C26E191B638B0500938608 /* CollectionExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8C26E1D1B638B0500938608 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8C26E1E1B638B0500938608 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -44,15 +54,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A882830B1B681DB40042083D /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A88283021B681CC80042083D /* CoreDataEntities */ = {
+			isa = PBXGroup;
+			children = (
+				A88283031B681CD90042083D /* Photo.h */,
+				A88283041B681CD90042083D /* Photo.m */,
+			);
+			path = CoreDataEntities;
+			sourceTree = "<group>";
+		};
 		A8C26E101B638B0500938608 = {
 			isa = PBXGroup;
 			children = (
+				A882830A1B681DB40042083D /* CoreData.framework */,
 				A8C26E1B1B638B0500938608 /* CollectionExample */,
 				A8C26E1A1B638B0500938608 /* Products */,
 			);
@@ -123,7 +144,11 @@
 		A8C26E4F1B638E4E00938608 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				A88283021B681CC80042083D /* CoreDataEntities */,
 				A8C26E501B638E4E00938608 /* Protocols */,
+				A88282FE1B681C2C0042083D /* Photos.xcdatamodeld */,
+				A88283071B681D3A0042083D /* CoreDataManager.h */,
+				A88283081B681D3A0042083D /* CoreDataManager.m */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -225,7 +250,10 @@
 			files = (
 				A8C26E481B638C0400938608 /* PhotoView.m in Sources */,
 				A8C26E4B1B638C0D00938608 /* PhotoViewController.m in Sources */,
+				A88283091B681D3A0042083D /* CoreDataManager.m in Sources */,
 				A8C26E581B6392D600938608 /* PhotoCell.m in Sources */,
+				A88283051B681CD90042083D /* Photo.m in Sources */,
+				A88283001B681C2C0042083D /* Photos.xcdatamodeld in Sources */,
 				A8C26E221B638B0500938608 /* AppDelegate.m in Sources */,
 				A8C26E631B65436700938608 /* PhotoItem.m in Sources */,
 				A8C26E1F1B638B0500938608 /* main.m in Sources */,
@@ -366,8 +394,22 @@
 				A8C26E3E1B638B0600938608 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A88282FE1B681C2C0042083D /* Photos.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A88282FF1B681C2C0042083D /* Photos.xcdatamodel */,
+			);
+			currentVersion = A88282FF1B681C2C0042083D /* Photos.xcdatamodel */;
+			path = Photos.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A8C26E111B638B0500938608 /* Project object */;
 }

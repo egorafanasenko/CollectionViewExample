@@ -8,25 +8,33 @@
 
 #import "PhotoItem.h"
 
+@interface PhotoItem ()
+
+@property(nonatomic, strong, readwrite) UIImage *image;
+@property(nonatomic, strong, readwrite) NSDate *createAt;
+
+@end
+
 @implementation PhotoItem
 
 #pragma mark Private methods
 
-- (instancetype)initWithSmallImage:(UIImage *)smallImage
+- (instancetype)initWithImage:(UIImage *)image createAt:(NSDate *)date
 {
     self = [super init];
     if(self)
     {
-        self.smallImage = smallImage;
+        self.image = image;
+        self.createAt = date;
     }
     return self;
 }
 
 #pragma mark Inteface methods
 
-+ (PhotoItem *)itemWithSmallImage:(UIImage *)smallImage
++ (PhotoItem *)itemWithImage:(UIImage *)image createAt:(NSDate *)date
 {
-    return [[PhotoItem alloc] initWithSmallImage:smallImage];
+    return [[PhotoItem alloc] initWithImage:image createAt:(NSDate *)date];
 }
 
 @end

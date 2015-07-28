@@ -13,6 +13,7 @@
 @property(nonatomic, strong, readwrite) UICollectionView *collectionView;
 @property(nonatomic, strong, readwrite) UICollectionViewFlowLayout *collectionViewLayout;
 @property(nonatomic, strong, readwrite) UIButton *addButton;
+@property(nonatomic, strong, readwrite) UIButton *removePhotosButton;
 
 @end
 
@@ -41,8 +42,19 @@
     self.addButton.translatesAutoresizingMaskIntoConstraints = NO;
     
     [self addSubview:self.addButton];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_addButton]|" options:(NSLayoutFormatOptions) 0 metrics:nil views:NSDictionaryOfVariableBindings(_addButton)]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.addButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_collectionView]-8-[_addButton]-8-|" options:(NSLayoutFormatOptions) 0 metrics:nil views:NSDictionaryOfVariableBindings(_collectionView, _addButton)]];
+}
+
+- (void)createRemovePhotosButton
+{
+    self.removePhotosButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    self.removePhotosButton.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [self addSubview:self.removePhotosButton];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_removePhotosButton]-8-|" options:(NSLayoutFormatOptions) 0 metrics:nil views:NSDictionaryOfVariableBindings(_removePhotosButton)]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_removePhotosButton]-<=0-|" options:(NSLayoutFormatOptions) 0 metrics:nil views:NSDictionaryOfVariableBindings(_removePhotosButton)]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.removePhotosButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.addButton attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0.0f]];
 }
 
 #pragma mark UIView methods
@@ -54,6 +66,7 @@
     {
         [self createCollectionView];
         [self createAddButton];
+        [self createRemovePhotosButton];
     }
     return self;
 }

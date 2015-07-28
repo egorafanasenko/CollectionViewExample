@@ -11,9 +11,10 @@
 
 @interface PhotoItem : NSObject
 
-@property(nonatomic, strong) UIImage *smallImage;
+@property(nonatomic, strong, readonly) UIImage *image;
+@property(nonatomic, strong, readonly) NSDate *createAt;
 @property(nonatomic, assign) BOOL isSelected;
 
-+ (PhotoItem *)itemWithSmallImage:(UIImage *)smallImage;
++ (PhotoItem *)itemWithImage:(UIImage *)image createAt:(NSDate *)date;
 
 @end
