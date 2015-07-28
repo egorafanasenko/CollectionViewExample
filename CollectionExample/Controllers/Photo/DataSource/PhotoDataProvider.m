@@ -21,7 +21,7 @@
 
 #pragma mark Pirvate methods
 
-- (void)createPhotos
+- (void)getPhotosFromDataBase
 {
     self.photos = [NSMutableArray array];
     
@@ -73,7 +73,7 @@
     self = [super init];
     if(self)
     {
-        [self createPhotos];
+        [self getPhotosFromDataBase];
     }
     return self;
 }
@@ -84,9 +84,7 @@
 {
     PhotoItem *item = [PhotoItem itemWithImage:image createAt:[NSDate date]];
     [self.photos addObject:item];
-    
-    [CoreDataManager sharedManager];
-    
+        
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^
     {
         Photo *photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:[CoreDataManager sharedManager].backgroundContext];
