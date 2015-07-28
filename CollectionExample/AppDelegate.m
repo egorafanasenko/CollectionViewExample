@@ -8,10 +8,7 @@
 
 #import "AppDelegate.h"
 #import "PhotoViewController.h"
-
-@interface AppDelegate ()
-
-@end
+#import "PhotoDataProvider.h"
 
 @implementation AppDelegate
 
@@ -19,7 +16,8 @@
 
 - (UIViewController *)createRootViewController
 {
-    return [[PhotoViewController alloc] init];
+    PhotoDataProvider *dataProvider = [[PhotoDataProvider alloc] init];
+    return [[PhotoViewController alloc] initWithDataProvider:dataProvider];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

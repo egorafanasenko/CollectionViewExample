@@ -9,8 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "PhotoView.h"
 
+@class PhotoDataProvider;
+
 @interface PhotoViewController : UIViewController
 
 @property(nonatomic, strong) PhotoView *view;
 
+- (instancetype)initWithDataProvider:(PhotoDataProvider *)dataProvider;
+
+- (instancetype)init __attribute__((unavailable("Deprecated")));
 @end

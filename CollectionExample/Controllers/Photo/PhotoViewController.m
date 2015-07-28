@@ -96,18 +96,6 @@ static NSString *const PhotoCellIdentifier = @"PhotoCellIdentifier";
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark NSObject methods
-
-- (instancetype)init
-{
-    self = [super init];
-    if(self)
-    {
-        self.dataProvider = [[PhotoDataProvider alloc] init];
-    }
-    return self;
-}
-
 #pragma mark UIViewController methods
 
 - (void)loadView
@@ -135,6 +123,18 @@ static NSString *const PhotoCellIdentifier = @"PhotoCellIdentifier";
 - (BOOL)prefersStatusBarHidden
 {
     return YES;
+}
+
+#pragma mark Interface methods
+
+- (instancetype)initWithDataProvider:(PhotoDataProvider *)dataProvider
+{
+    self = [super init];
+    if(self)
+    {
+        self.dataProvider = dataProvider;
+    }
+    return self;
 }
 
 @end
