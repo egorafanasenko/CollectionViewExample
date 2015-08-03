@@ -10,21 +10,28 @@
 
 @interface PhotoItem ()
 
-@property(nonatomic, strong, readwrite) UIImage *image;
+@property(nonatomic, strong, readwrite) UIImage *smallImage;
+@property(nonatomic, strong, readwrite) UIImage *largeImage;
 @property(nonatomic, strong, readwrite) NSDate *createAt;
 
 @end
 
 @implementation PhotoItem
+@synthesize image;
+@synthesize placeholderImage;
+@synthesize attributedCaptionCredit;
+@synthesize attributedCaptionSummary;
+@synthesize attributedCaptionTitle;
 
 #pragma mark Private methods
 
-- (instancetype)initWithImage:(UIImage *)image createAt:(NSDate *)date
+- (instancetype)initWithLargeImage:(UIImage *)largeImage smallImage:(UIImage *)smaillImage createAt:(NSDate *)date
 {
     self = [super init];
     if(self)
     {
-        self.image = image;
+        self.largeImage = largeImage;
+        self.smallImage = smaillImage;
         self.createAt = date;
     }
     return self;
@@ -32,9 +39,21 @@
 
 #pragma mark Inteface methods
 
-+ (PhotoItem *)itemWithImage:(UIImage *)image createAt:(NSDate *)date
++ (PhotoItem *)itemWithLargeImage:(UIImage *)largeImage smallImage:(UIImage *)smaillImage createAt:(NSDate *)date
 {
-    return [[PhotoItem alloc] initWithImage:image createAt:(NSDate *)date];
+    return [[PhotoItem alloc] initWithLargeImage:largeImage smallImage:smaillImage createAt:date];
+}
+
+#pragma mark Getters
+
+- (UIImage *)image
+{
+    return self.largeImage;
+}
+
+- (UIImage *)placeholderImage
+{
+    return self.smallImage;
 }
 
 @end

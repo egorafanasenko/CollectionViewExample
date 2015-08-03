@@ -14,6 +14,7 @@
 @property(nonatomic, strong, readwrite) UICollectionViewFlowLayout *collectionViewLayout;
 @property(nonatomic, strong, readwrite) UIButton *addButton;
 @property(nonatomic, strong, readwrite) UIButton *removePhotosButton;
+@property(nonatomic, strong, readwrite) UIButton *editedButton;
 
 @end
 
@@ -57,6 +58,17 @@
     [self addConstraint:[NSLayoutConstraint constraintWithItem:self.removePhotosButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.addButton attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0.0f]];
 }
 
+- (void)createEditedButton
+{
+    self.editedButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    self.editedButton.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [self addSubview:self.editedButton];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-8-[_editedButton]" options:(NSLayoutFormatOptions) 0 metrics:nil views:NSDictionaryOfVariableBindings(_editedButton)]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_editedButton]-<=0-|" options:(NSLayoutFormatOptions) 0 metrics:nil views:NSDictionaryOfVariableBindings(_editedButton)]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self.editedButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.addButton attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0.0f]];
+}
+
 #pragma mark UIView methods
 
 - (instancetype)init
@@ -67,6 +79,7 @@
         [self createCollectionView];
         [self createAddButton];
         [self createRemovePhotosButton];
+        [self createEditedButton];
     }
     return self;
 }

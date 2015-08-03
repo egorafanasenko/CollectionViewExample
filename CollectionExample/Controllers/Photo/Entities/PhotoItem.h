@@ -8,13 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import "NYTPhoto.h"
 
 @interface PhotoItem : NSObject
+<
+    NYTPhoto
+>
 
-@property(nonatomic, strong, readonly) UIImage *image;
+@property(nonatomic, strong, readonly) UIImage *smallImage;
+@property(nonatomic, strong, readonly) UIImage *largeImage;
 @property(nonatomic, strong, readonly) NSDate *createAt;
 @property(nonatomic, assign) BOOL isSelected;
 
-+ (PhotoItem *)itemWithImage:(UIImage *)image createAt:(NSDate *)date;
++ (PhotoItem *)itemWithLargeImage:(UIImage *)largeImage smallImage:(UIImage *)smaillImage createAt:(NSDate *)date;
 
 @end

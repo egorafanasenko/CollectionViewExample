@@ -11,7 +11,8 @@
 
 @implementation Photo
 
-@dynamic imageData;
+@dynamic largeImageData;
+@dynamic smalImageData;
 @dynamic createAt;
 
 @end

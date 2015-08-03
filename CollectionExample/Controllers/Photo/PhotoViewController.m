@@ -9,8 +9,17 @@
 #import "PhotoViewController.h"
 #import "PhotoCell.h"
 #import "PhotoDataProvider.h"
+#import "NYTPhotosViewController.h"
+
+#define ONSYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 
 static NSString *const PhotoCellIdentifier = @"PhotoCellIdentifier";
+
+typedef NS_ENUM(NSUInteger, PhotoState)
+{
+    PhotoStateDefault = 0,
+    PhotoStateEdited
+};
 
 @interface PhotoViewController()
 <
@@ -23,12 +32,32 @@ static NSString *const PhotoCellIdentifier = @"PhotoCellIdentifier";
 
 @property(nonatomic, strong) PhotoDataProvider *dataProvider;
 
+@property(nonatomic, assign) PhotoState state;
+
 @end
 
 @implementation PhotoViewController
 @dynamic view;
 
 #pragma mark Private methods
+
+- (void)onEditedButtonClick:(UIButton *)button
+{
+    switch(self.state)
+    {
+        case PhotoStateDefault:
+            self.state = PhotoStateEdited;
+            break;
+            
+        case PhotoStateEdited:
+            self.state = PhotoStateDefault;
+            break;
+            
+        default:
+            NSAssert(@"NO", @"unknwon state %li", (long)self.state);
+            break;
+    }
+}
 
 - (void)onAddButtonClick:(UIButton *)button
 {
@@ -38,8 +67,11 @@ static NSString *const PhotoCellIdentifier = @"PhotoCellIdentifier";
 - (void)onRemovePhotosButtonClock:(UIButton *)button
 {
     NSArray *indexPaths = [self.dataProvider selectedPhotosIndexPaths];
-    [self.dataProvider removeSelectedPhotos];
-    [self.view.collectionView deleteItemsAtIndexPaths:indexPaths];
+    if(indexPaths.count > 0)
+    {
+        [self.dataProvider removeSelectedPhotos];
+        [self.view.collectionView deleteItemsAtIndexPaths:indexPaths];
+    }
 }
 
 - (void)createImagePicker
@@ -49,6 +81,37 @@ static NSString *const PhotoCellIdentifier = @"PhotoCellIdentifier";
     imagePicker.delegate = self;
     
     [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+- (void)createPhotosViewControllerWithInitialPhotoIndexPath:(NSIndexPath *)initialPhotoPath
+{
+    NYTPhotosViewController *photosViewController = [[NYTPhotosViewController alloc] initWithPhotos:[self.dataProvider largeImages] initialPhoto:[self.dataProvider objectForIndexPath:initialPhotoPath]];
+    
+    [self presentViewController:photosViewController animated:YES completion:nil];
+}
+
+#pragma mark Setters
+
+- (void)setState:(PhotoState)state
+{
+    _state = state;
+    
+    switch(state)
+    {
+        case PhotoStateDefault:
+            self.view.removePhotosButton.highlighted = YES;
+            [self.view.editedButton setTitle:@"Edited" forState:UIControlStateNormal];
+            break;
+            
+        case PhotoStateEdited:
+            self.view.removePhotosButton.highlighted = NO;
+            [self.view.editedButton setTitle:@"Default" forState:UIControlStateNormal];
+            break;
+            
+        default:
+            NSAssert(NO, @"unknown state %li", (long)state);
+            break;
+    }
 }
 
 #pragma mark UICollectionViewDataSourceProtocol methods
@@ -69,9 +132,26 @@ static NSString *const PhotoCellIdentifier = @"PhotoCellIdentifier";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    PhotoItem *item = [self.dataProvider objectForIndexPath:indexPath];
-    item.isSelected = !item.isSelected;
-    [self.view.collectionView reloadItemsAtIndexPaths:@[indexPath]];
+    switch (self.state)
+    {
+        case PhotoStateDefault:
+        {
+            [self createPhotosViewControllerWithInitialPhotoIndexPath:indexPath];
+        }
+        break;
+            
+        case PhotoStateEdited:
+        {
+            PhotoItem *item = [self.dataProvider objectForIndexPath:indexPath];
+            item.isSelected = !item.isSelected;
+            [self.view.collectionView reloadItemsAtIndexPaths:@[indexPath]];
+        }
+        break;
+            
+        default:
+            NSAssert(NO, @"unknown photo state %li", (long)self.state);
+            break;
+    }
 }
 
 #pragma mark UICollectionViewDelegateFlowLayout protocl methods
@@ -88,7 +168,8 @@ static NSString *const PhotoCellIdentifier = @"PhotoCellIdentifier";
 {
     UIImage *photo = info[UIImagePickerControllerOriginalImage];
     
-    [self.dataProvider addPhoto:photo];
+    CGFloat photoItemWidth = ((CGRectGetWidth(self.view.frame) / 3.0f) - 1.0f) * 2.0f;
+    [self.dataProvider addPhoto:photo withScale:CGSizeMake(photoItemWidth, photoItemWidth)];
     NSIndexPath *photoPath = [NSIndexPath indexPathForRow:[self.dataProvider numberOfRowsInSection:0] - 1 inSection:0];
     [self.view.collectionView insertItemsAtIndexPaths:@[photoPath]];
     [self.view.collectionView scrollToItemAtIndexPath:photoPath atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
@@ -107,8 +188,10 @@ static NSString *const PhotoCellIdentifier = @"PhotoCellIdentifier";
 {
     [super viewDidLoad];
     
-    [self.view.removePhotosButton setTitle:@"Remove" forState:UIControlStateNormal];
+    [self.view.removePhotosButton setTitle:NSLocalizedString(@"Remove", nil) forState:UIControlStateNormal];
+    [self.view.editedButton setTitle:NSLocalizedString(@"Edited", nil) forState:UIControlStateNormal];
     
+    [self.view.editedButton addTarget:self action:@selector(onEditedButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.view.addButton addTarget:self action:@selector(onAddButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.view.removePhotosButton addTarget:self action:@selector(onRemovePhotosButtonClock:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -118,6 +201,8 @@ static NSString *const PhotoCellIdentifier = @"PhotoCellIdentifier";
     self.view.collectionViewLayout.minimumInteritemSpacing = 1.0f;
     self.view.collectionView.dataSource = self;
     self.view.collectionView.delegate = self;
+    
+    self.state = PhotoStateDefault;
 }
 
 - (BOOL)prefersStatusBarHidden

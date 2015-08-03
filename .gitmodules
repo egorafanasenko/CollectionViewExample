@@ -1,0 +1,3 @@
+[submodule "Submodule/NYTPhotoViewer"]
+	path = Submodule/NYTPhotoViewer
+	url = https://github.com/NYTimes/NYTPhotoViewer.git

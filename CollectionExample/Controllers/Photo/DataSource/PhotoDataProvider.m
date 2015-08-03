@@ -10,6 +10,7 @@
 #import "PhotoItem.h"
 #import "CoreDataManager.h"
 #import "Photo.h"
+#import "UIImage+Scale.h"
 
 @interface PhotoDataProvider()
 
@@ -35,7 +36,7 @@
 
     for(Photo *photo in photos)
     {
-        [self.photos addObject:[PhotoItem itemWithImage:[UIImage imageWithData:photo.imageData] createAt:photo.createAt]];
+        [self.photos addObject:[PhotoItem itemWithLargeImage:[UIImage imageWithData:photo.largeImageData] smallImage:[UIImage imageWithData:photo.smalImageData] createAt:photo.createAt]];
     }
 }
 
@@ -66,6 +67,11 @@
     return self.photos[(NSUInteger)indexPath.row];
 }
 
+- (NSIndexPath *)indexPathForObject:(id)object
+{
+    return [NSIndexPath indexPathForRow:[self.photos indexOfObject:object] inSection:0];
+}
+
 #pragma mark NSObject methods
 
 - (instancetype)init
@@ -80,20 +86,24 @@
 
 #pragma mark Interface methods
 
-- (void)addPhoto:(UIImage *)image
+- (void)addPhoto:(UIImage *)image withScale:(CGSize)scaleSize
 {
-    PhotoItem *item = [PhotoItem itemWithImage:image createAt:[NSDate date]];
+    UIImage *scaledImage = [image imageByScalingAndCroppingForSize:scaleSize];
+    PhotoItem *item = [PhotoItem itemWithLargeImage:image smallImage:scaledImage createAt:[NSDate date]];
     [self.photos addObject:item];
-    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^
     {
-        Photo *photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:[CoreDataManager sharedManager].backgroundContext];
-        
-        NSData *imageData = UIImageJPEGRepresentation(item.image, 1.0f);
-        photo.imageData = imageData;
+        NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        [context setParentContext:[[CoreDataManager sharedManager] managedObjectContext]];
+        Photo *photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:context];
+
+        NSData *largeImageData = UIImageJPEGRepresentation(item.largeImage, 0.0f);
+        NSData *smallImageData = UIImageJPEGRepresentation(item.smallImage, 0.0f);
+        photo.largeImageData = largeImageData;
+        photo.smalImageData = smallImageData;
         photo.createAt = item.createAt;
-        
-        [[CoreDataManager sharedManager] saveBackgroundContext];
+
+        [[CoreDataManager sharedManager] saveContext:context];
     });
 }
 
@@ -128,6 +138,11 @@
     
     [self.photos removeObjectsInArray:selectedPhotos];
     [[CoreDataManager sharedManager] saveMainContext];
+}
+
+- (NSArray *)largeImages
+{
+    return [self.photos filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"largeImage != nil"]];
 }
 
 @end

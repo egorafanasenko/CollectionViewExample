@@ -11,7 +11,6 @@
 @interface CoreDataManager()
 
 @property(nonatomic, strong, readwrite) NSManagedObjectContext *managedObjectContext;
-@property(nonatomic, strong, readwrite) NSManagedObjectContext *backgroundContext;
 @property(nonatomic, strong) NSManagedObjectModel *managedObjectModel;
 @property(nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
@@ -34,17 +33,6 @@
         [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     }
     return _managedObjectContext;
-}
-
-- (NSManagedObjectContext *)backgroundContext
-{
-    if(_backgroundContext)
-    {
-        return _backgroundContext;
-    }
-    _backgroundContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    [_backgroundContext setParentContext:self.managedObjectContext];
-    return _backgroundContext;
 }
 
 - (NSManagedObjectModel *)managedObjectModel
@@ -120,26 +108,24 @@
      }];
 }
 
-- (void)saveBackgroundContext
+- (void)saveContext:(NSManagedObjectContext *)context
 {
-    __block NSError *error = nil;
-    
-    [self.backgroundContext performBlock:^
-    {
-         if(![self.backgroundContext save:&error])
+    [context performBlock:^
+     {
+         NSError *currentContextError = nil;
+         if(![context save:&currentContextError])
          {
-             NSLog(@"error %@", error.localizedDescription);
+             NSLog(@"current context error %@", currentContextError.localizedDescription);
          }
-
-        [self.managedObjectContext performBlock:^
-        {
-            NSError *error;
-            if(![self.managedObjectContext save:&error])
-            {
-                NSLog(@"error %@", error.localizedDescription);
-            }
-        }];
-    }];
+         [context.parentContext performBlock:^
+         {
+             NSError *mainContextError = nil;
+             if(![context.parentContext save:&mainContextError])
+             {
+                 NSLog(@"main context error %@", mainContextError.localizedDescription);
+             }
+         }];
+     }];
 }
 
 @end

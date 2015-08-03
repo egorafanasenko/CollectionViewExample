@@ -12,10 +12,10 @@
 @interface CoreDataManager : NSObject
 
 @property(nonatomic, strong, readonly) NSManagedObjectContext *managedObjectContext;
-@property(nonatomic, strong, readonly) NSManagedObjectContext *backgroundContext;
 
 + (instancetype)sharedManager;
 - (void)saveMainContext;
-- (void)saveBackgroundContext;
+
+- (void)saveContext:(NSManagedObjectContext *)context;
 
 @end

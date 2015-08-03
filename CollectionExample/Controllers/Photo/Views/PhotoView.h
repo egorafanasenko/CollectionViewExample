@@ -14,5 +14,6 @@
 @property(nonatomic, strong, readonly) UICollectionViewFlowLayout *collectionViewLayout;
 @property(nonatomic, strong, readonly) UIButton *addButton;
 @property(nonatomic, strong, readonly) UIButton *removePhotosButton;
+@property(nonatomic, strong, readonly) UIButton *editedButton;
 
 @end

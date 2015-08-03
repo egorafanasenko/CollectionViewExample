@@ -15,9 +15,11 @@
     DataProvider
 >
 
-- (void)addPhoto:(UIImage *)image;
+- (void)addPhoto:(UIImage *)image withScale:(CGSize)scaleSize;
 
 - (NSArray *)selectedPhotosIndexPaths;
 - (void)removeSelectedPhotos;
+
+- (NSArray *)largeImages;
 
 @end

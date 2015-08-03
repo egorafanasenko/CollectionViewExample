@@ -12,7 +12,8 @@
 
 @interface Photo : NSManagedObject
 
-@property (nonatomic, retain) NSData * imageData;
+@property (nonatomic, retain) NSData * largeImageData;
+@property (nonatomic, retain) NSData * smalImageData;
 @property (nonatomic, retain) NSDate * createAt;
 
 @end
