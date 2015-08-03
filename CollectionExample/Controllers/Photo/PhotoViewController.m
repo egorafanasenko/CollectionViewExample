@@ -11,8 +11,6 @@
 #import "PhotoDataProvider.h"
 #import "NYTPhotosViewController.h"
 
-#define ONSYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
-
 static NSString *const PhotoCellIdentifier = @"PhotoCellIdentifier";
 
 typedef NS_ENUM(NSUInteger, PhotoState)
