@@ -8,5 +8,5 @@ Submodule/NYTPhotoViewer example.
 * Comments for images
 * UI
 * Conditions for total available/free disk space
-* ** ideas? **
+* Ideas?
 
