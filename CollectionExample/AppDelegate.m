@@ -20,6 +20,8 @@
     return [[PhotoViewController alloc] initWithDataProvider:dataProvider];
 }
 
+#pragma mark UIApplicationDelegate protocol methods
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
